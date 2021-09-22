@@ -9,7 +9,7 @@ class EmpleadoAsalariado:public Empleado{
 	float salario = 0.0f;
 
 	public:
-	EmpleadoAsalariado(int id,string nombre,string correo,Empleado *jefe);
+	EmpleadoAsalariado(int id,string nombre,string correo);
 
 };
 

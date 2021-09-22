@@ -7,7 +7,6 @@
 int main() {
 
 	Planilla *planilla = new Planilla(1,"Diego","prueba@hotmail.com", 1);
-	cout<<
-
-	return 0;
+	planilla->agregarEmpleado();
+		return 0;
 }

@@ -10,7 +10,7 @@ class EmpleadoHoras:public Empleado{
 	int horasLaboradas{ 0 };
 
 	public:
-	EmpleadoHoras(int id, string nombre, string correo, Empleado* jefe);
+	EmpleadoHoras(int id, string nombre, string correo);
 };
 
 #endif

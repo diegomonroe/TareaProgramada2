@@ -1,6 +1,8 @@
 #include "empleadoAsalariado.h"
 
-EmpleadoAsalariado::EmpleadoAsalariado(int id, string nombre, string correo, Empleado* jefe)
+EmpleadoAsalariado::EmpleadoAsalariado(int idNuevo, string nombreNuevo, string correoNuevo)
 {
-	
+	this->id = idNuevo;
+	this->nombre = nombreNuevo;
+	this->correo = correoNuevo;
 }
