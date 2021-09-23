@@ -8,5 +8,7 @@ int main() {
 
 	Planilla *planilla = new Planilla(1,"Diego","prueba@hotmail.com", 1);
 	planilla->agregarEmpleado(2, "Angelica","curling26@gmail.com",2,1);
-		return 0;
+	delete planilla;
+	
+	return 0;
 }

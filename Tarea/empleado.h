@@ -11,20 +11,16 @@ using namespace std;
 class Empleado{
 
 	protected:
-		int	id{ 0 };
-		string nombre{ "" };
-		string correo{ "" };
-		vector <Empleado*>empleadosDirectos;
+	int	id{ 0 };
+	string nombre{ "" };
+	string correo{ "" };
+	vector <Empleado*>empleadosDirectos;
 
 	Empleado(){}
 
-	
-
 	public:
-	//void agregarEmpleadoDirecto(Empleado* empleadoDirecto) {}
-	//Empleado(int id, string nombre, string correo, Empleado *empleados);
 	~Empleado(){}
-	virtual void agregarEmpleadoDirecto(Empleado*) {};
+	virtual void agregarEmpleadoDirecto(Empleado*) {}
 
 };
 

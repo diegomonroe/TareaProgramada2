@@ -1,6 +1,7 @@
 #include "planilla.h"
 #include "empleadoAsalariado.h"
 #include "empleadoHoras.h"
+#include <iostream>
 
 
 
@@ -23,7 +24,7 @@ Planilla::Planilla(int idJefe, string nombreJefe, string correoJefe, int tipoEmp
 
 Planilla::~Planilla()
 {
-
+	delete this->jefe;
 }
 
 void Planilla::agregarEmpleado(int id, string nombre, string correo, int tipoEmpleado, int idJefe)

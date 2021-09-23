@@ -12,6 +12,7 @@ class EmpleadoHoras:public Empleado{
 	public:
 	EmpleadoHoras(int id, string nombre, string correo);
 	virtual void agregarEmpleadoDirecto(Empleado*);
+	~EmpleadoHoras();
 };
 
 #endif
