@@ -41,8 +41,8 @@ void Planilla::agregarEmpleado(int id, string nombre, string correo, int tipoEmp
 		break;
 	}
 
-	Empleado* jefe = this->trabajadores.at(idJefe);
-	jefe->agregarEmpleadoDirecto(nuevoEmpleado);
+	Empleado* jefeDirecto = this->trabajadores.at(idJefe);
+	jefeDirecto->agregarEmpleadoDirecto(nuevoEmpleado);
 	this->trabajadores.insert(pair<int, Empleado*>(id, nuevoEmpleado));
 
 }

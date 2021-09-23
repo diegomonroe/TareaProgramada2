@@ -21,10 +21,10 @@ class Empleado{
 	
 
 	public:
-	void agregarEmpleadoDirecto(Empleado*) {}
+	//void agregarEmpleadoDirecto(Empleado* empleadoDirecto) {}
 	//Empleado(int id, string nombre, string correo, Empleado *empleados);
 	~Empleado(){}
-	virtual void agregarEmpleadoDirecto(Empleado *empleadoDirecto);
+	virtual void agregarEmpleadoDirecto(Empleado*) {};
 
 };
 

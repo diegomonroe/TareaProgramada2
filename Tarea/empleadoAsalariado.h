@@ -10,7 +10,7 @@ class EmpleadoAsalariado:public Empleado{
 
 	public:
 	EmpleadoAsalariado(int id,string nombre,string correo);
-
+	virtual void agregarEmpleadoDirecto(Empleado *);
 };
 
 

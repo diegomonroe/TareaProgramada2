@@ -6,3 +6,8 @@ EmpleadoAsalariado::EmpleadoAsalariado(int idNuevo, string nombreNuevo, string c
 	this->nombre = nombreNuevo;
 	this->correo = correoNuevo;
 }
+
+void EmpleadoAsalariado::agregarEmpleadoDirecto(Empleado* nuevoEmpleado)
+{
+	this->empleadosDirectos.push_back(nuevoEmpleado);
+}
