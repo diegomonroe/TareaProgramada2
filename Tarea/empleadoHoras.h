@@ -10,9 +10,9 @@ class EmpleadoHoras:public Empleado{
 	int horasLaboradas{ 0 };
 
 	public:
-	EmpleadoHoras(int id, string nombre, string correo);
+	EmpleadoHoras(int id, string nombre,string apellido, string correo);
 	virtual void agregarEmpleadoDirecto(Empleado*);
-	~EmpleadoHoras();
+	virtual ~EmpleadoHoras();
 };
 
 #endif

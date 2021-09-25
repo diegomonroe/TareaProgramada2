@@ -8,16 +8,16 @@
 
 class Planilla
 {
-	Empleado* jefe=0;
+	Empleado* jefe;
 	map<int, Empleado *> trabajadores;
 
-
 	public:
-	Planilla(int idJefe, string nombreJefe, string correoJefe, int tipoEmpleado);
-	~Planilla();
 
-	void agregarEmpleado(int id, string nombre, string correo, int tipoEmpleado, int idJefe);
-	//void llenarPlanilla(ifstream );
+	void agregarDirector(int idJefe, string nombreJefe, string apellidoJefe, string correoJefe, int tipoEmpleado);
+	Planilla();
+	~Planilla();
+	void agregarEmpleado(int id, string nombre, string apellido, string correo, int tipoEmpleado, int idJefe);
+	void llenarPlanilla();
 };
 
 #endif

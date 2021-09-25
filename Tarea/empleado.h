@@ -11,15 +11,17 @@ using namespace std;
 class Empleado{
 
 	protected:
-	int	id{ 0 };
+	
 	string nombre{ "" };
+	string apellido{""};
 	string correo{ "" };
 	vector <Empleado*>empleadosDirectos;
 
 	Empleado(){}
 
 	public:
-	~Empleado(){}
+		int	id{ 0 };
+	virtual ~Empleado(){}
 	virtual void agregarEmpleadoDirecto(Empleado*) {}
 
 };

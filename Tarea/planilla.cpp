@@ -2,18 +2,19 @@
 #include "empleadoAsalariado.h"
 #include "empleadoHoras.h"
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
 
-
-
-Planilla::Planilla(int idJefe, string nombreJefe, string correoJefe, int tipoEmpleado)
+void Planilla::agregarDirector(int idJefe, string nombreJefe, string apellidoJefe, string correoJefe, int tipoEmpleado)
 {
 	switch (tipoEmpleado)
 	{
 	case 1:
-		this->jefe = new EmpleadoAsalariado(idJefe, nombreJefe, correoJefe);
+		this->jefe = new EmpleadoAsalariado(idJefe, nombreJefe, apellidoJefe, correoJefe);
 		break;
 	case 2:
-		this->jefe = new EmpleadoHoras(idJefe, nombreJefe, correoJefe);
+		this->jefe = new EmpleadoHoras(idJefe, nombreJefe, apellidoJefe, correoJefe);
 		break;
 	default:
 		break;
@@ -22,21 +23,26 @@ Planilla::Planilla(int idJefe, string nombreJefe, string correoJefe, int tipoEmp
 	this->trabajadores.insert(pair<int, Empleado*>(idJefe, jefe));
 }
 
+Planilla::Planilla()
+{
+    this->jefe = nullptr;
+}
+
 Planilla::~Planilla()
 {
 	delete this->jefe;
 }
 
-void Planilla::agregarEmpleado(int id, string nombre, string correo, int tipoEmpleado, int idJefe)
+void Planilla::agregarEmpleado(int id, string nombre, string apellido, string correo, int tipoEmpleado, int idJefe)
 {
 	Empleado* nuevoEmpleado = 0;
 	switch (tipoEmpleado)
 	{
-	case 1:
-		nuevoEmpleado = new EmpleadoAsalariado(id, nombre, correo);
+    case 1:
+		nuevoEmpleado = new EmpleadoAsalariado(id, nombre, apellido, correo);
 		break;
 	case 2:
-		nuevoEmpleado = new EmpleadoHoras(id, nombre, correo);
+		nuevoEmpleado = new EmpleadoHoras(id, nombre, apellido, correo);
 		break;
 	default:
 		break;
@@ -47,4 +53,70 @@ void Planilla::agregarEmpleado(int id, string nombre, string correo, int tipoEmp
 	this->trabajadores.insert(pair<int, Empleado*>(id, nuevoEmpleado));
 
 }
+
+void Planilla::llenarPlanilla()
+{
+    ifstream ifs("prueba.txt", ifstream::in);
+    if (!ifs.is_open())
+    {
+        cerr << "Error leyendo archivo ejemplo.txt" << endl;
+        //return -1;
+    }
+    
+   
+    // Leer línea por línea 
+    string linea{ "" };
+
+    int id{ 0 };
+    string nombre{""};
+    string apellido{""};
+    string correo{""};
+    int tipoTrabajador{ 0 };
+    int idJefe{ 0 };
+
+
+    while (getline(ifs, linea)) {
+
+        try
+        {
+            // Procesamos la línea
+            istringstream stream(linea);
+
+            id = 0;
+            nombre = "";
+            apellido = "";
+            correo = "";
+            tipoTrabajador = 0;
+            idJefe = 0;
+
+            stream >> id >> nombre >> apellido >> correo>>tipoTrabajador>>idJefe;
+
+            // Revisar si línea es válida
+            if (nombre.length() == 0)
+            {
+                string error = "Error en línea \"" + linea + "\". Nombre no puede ser vacío.";
+                throw error;
+            }
+
+            if (idJefe == 0) 
+            {
+                this->agregarDirector(id, nombre, apellido, correo, tipoTrabajador);
+            }
+            else
+            {
+                this->agregarEmpleado(id, nombre, apellido, correo, tipoTrabajador, idJefe);
+            }
+
+            //cout << "Linea de " << nombre << " es correcta." << endl;
+        }
+        catch (string& excepcion)
+        {
+            cerr << excepcion << endl;
+        }
+    }
+
+
+    ifs.close();
+}
+
 

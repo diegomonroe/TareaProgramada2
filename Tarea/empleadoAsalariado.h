@@ -9,9 +9,9 @@ class EmpleadoAsalariado:public Empleado{
 	float salario = 0.0f;
 
 	public:
-	EmpleadoAsalariado(int id,string nombre,string correo);
+	EmpleadoAsalariado(int id,string nombre, string apellido,string correo);
 	virtual void agregarEmpleadoDirecto(Empleado *);
-	~EmpleadoAsalariado();
+	virtual ~EmpleadoAsalariado();
 };
 
 
