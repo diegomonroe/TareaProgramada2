@@ -17,8 +17,12 @@ void EmpleadoAsalariado::agregarEmpleadoDirecto(Empleado* nuevoEmpleado)
 EmpleadoAsalariado::~EmpleadoAsalariado()
 {
 	for (Empleado* empleado : this->empleadosDirectos) {
-		cout << "Eliminando empleado" << empleado->id << endl;
 		delete empleado;
 	}
+}
+
+void EmpleadoAsalariado::agregarSalario(float salarioNuevo)
+{
+	this->salario = salarioNuevo;
 }
 

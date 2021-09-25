@@ -18,6 +18,7 @@ class Planilla
 	~Planilla();
 	void agregarEmpleado(int id, string nombre, string apellido, string correo, int tipoEmpleado, int idJefe);
 	void llenarPlanilla();
+	void agregarSalarios();
 };
 
 #endif

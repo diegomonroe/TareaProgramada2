@@ -56,7 +56,7 @@ void Planilla::agregarEmpleado(int id, string nombre, string apellido, string co
 
 void Planilla::llenarPlanilla()
 {
-    ifstream ifs("prueba.txt", ifstream::in);
+    ifstream ifs("Personas.txt", ifstream::in);
     if (!ifs.is_open())
     {
         cerr << "Error leyendo archivo ejemplo.txt" << endl;
@@ -106,6 +106,60 @@ void Planilla::llenarPlanilla()
             {
                 this->agregarEmpleado(id, nombre, apellido, correo, tipoTrabajador, idJefe);
             }
+
+            //cout << "Linea de " << nombre << " es correcta." << endl;
+        }
+        catch (string& excepcion)
+        {
+            cerr << excepcion << endl;
+        }
+    }
+
+
+    ifs.close();
+}
+
+void Planilla::agregarSalarios()
+{
+    ifstream ifs("Nomina.txt", ifstream::in);
+    if (!ifs.is_open())
+    {
+        cerr << "Error leyendo archivo ejemplo.txt" << endl;
+        //return -1;
+    }
+
+
+    // Leer línea por línea 
+    string linea{ "" };
+    int id{ 0 };
+    float salario{ 0.0f };
+
+
+    while (getline(ifs, linea)) {
+
+        try
+        {
+            // Procesamos la línea
+            istringstream stream(linea);
+
+            id = 0;
+            salario = 0.0f;
+
+            stream >> id >> salario;
+
+            // Revisar si línea es válida
+            if (id == 0)
+            {
+                string error = "Error en línea \"" + linea + "\". Nombre no puede ser vacío.";
+                throw error;
+            }
+            else 
+            {
+                Empleado* empleado = this->trabajadores.at(id);
+                empleado->agregarSalario(salario);
+            }
+
+            
 
             //cout << "Linea de " << nombre << " es correcta." << endl;
         }

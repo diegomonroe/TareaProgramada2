@@ -19,7 +19,6 @@ EmpleadoHoras::~EmpleadoHoras()
 {
 	
 	for (Empleado* empleado : this->empleadosDirectos) {
-		cout << "Eliminando empleado" <<empleado->id<< endl;
 		delete empleado;
 	}
 }

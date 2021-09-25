@@ -10,7 +10,7 @@ int main() {
 	Planilla* planilla = new Planilla();
 	
 	planilla->llenarPlanilla();
-	
+	planilla->agregarSalarios();
 	
 	delete planilla;
 	
