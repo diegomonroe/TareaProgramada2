@@ -23,3 +23,9 @@ EmpleadoHoras::~EmpleadoHoras()
 	}
 }
 
+void EmpleadoHoras::agregarPagoHoras(float montoHora, int horas)
+{
+	this->horasLaboradas = horas;
+	this->montoPorHora = montoHora;
+}
+

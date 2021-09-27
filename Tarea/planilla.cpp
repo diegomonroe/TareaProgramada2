@@ -146,7 +146,7 @@ void Planilla::agregarSalarios()
             salario = 0.0f;
 
             stream >> id >> salario;
-
+            //cout << salario<<endl;
             // Revisar si línea es válida
             if (id == 0)
             {
@@ -173,4 +173,66 @@ void Planilla::agregarSalarios()
     ifs.close();
 }
 
+void Planilla::agregarHoras()
+{
+    ifstream ifs("HorasTrabajadas.txt", ifstream::in);
+    if (!ifs.is_open())
+    {
+        cerr << "Error leyendo archivo ejemplo.txt" << endl;
+        //return -1;
+    }
 
+
+    // Leer línea por línea 
+    string linea{ "" };
+    int id{ 0 };
+    float montoHora{ 0.0f };
+    int horaLaborada{ 0 };
+
+
+    while (getline(ifs, linea)) {
+
+        try
+        {
+            // Procesamos la línea
+            istringstream stream(linea);
+
+            id = 0;
+            montoHora = 0.0f;
+            horaLaborada = 0;
+            stream >> id >> montoHora>>horaLaborada;
+
+            // Revisar si línea es válida
+            if (id == 0)
+            {
+                string error = "Error en línea \"" + linea + "\". Nombre no puede ser vacío.";
+                throw error;
+            }
+            
+            Empleado* empleado = this->trabajadores.at(id);
+            empleado->agregarPagoHoras(montoHora, horaLaborada);
+           
+
+
+
+            //cout << "Linea de " << nombre << " es correcta." << endl;
+        }
+        catch (string& excepcion)
+        {
+            cerr << excepcion << endl;
+        }
+    }
+
+
+    ifs.close();
+}
+/*
+std::ostream& operator<<(std::ostream& o, const Planilla& planilla)
+{
+    Empleado* jefe = planilla.jefe;
+    o << *(jefe);
+
+    return o;
+    return o;
+}
+*/

@@ -13,6 +13,7 @@ class EmpleadoHoras:public Empleado{
 	EmpleadoHoras(int id, string nombre,string apellido, string correo);
 	virtual void agregarEmpleadoDirecto(Empleado*);
 	virtual ~EmpleadoHoras();
+	virtual void agregarPagoHoras(float montoHora, int horas);
 };
 
 #endif

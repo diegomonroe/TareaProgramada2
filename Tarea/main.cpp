@@ -11,7 +11,7 @@ int main() {
 	
 	planilla->llenarPlanilla();
 	planilla->agregarSalarios();
-	
+	planilla->agregarHoras();
 	delete planilla;
 	
 

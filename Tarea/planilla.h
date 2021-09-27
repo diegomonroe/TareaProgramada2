@@ -19,6 +19,9 @@ class Planilla
 	void agregarEmpleado(int id, string nombre, string apellido, string correo, int tipoEmpleado, int idJefe);
 	void llenarPlanilla();
 	void agregarSalarios();
+	void agregarHoras();
+
+	//friend std::ostream& operator << (std::ostream& o, const Planilla& planilla);
 };
 
 #endif

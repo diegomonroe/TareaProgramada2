@@ -24,6 +24,7 @@ class Empleado{
 	virtual ~Empleado(){}
 	virtual void agregarEmpleadoDirecto(Empleado*) {}
 	virtual void agregarSalario(float salarioNuevo){}
+	virtual void agregarPagoHoras(float pagoHora, int horas) {}
 };
 
 #endif
