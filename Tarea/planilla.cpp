@@ -146,22 +146,23 @@ void Planilla::agregarSalarios()
             salario = 0.0f;
 
             stream >> id >> salario;
-            //cout << salario<<endl;
+
+
             // Revisar si línea es válida
             if (id == 0)
             {
                 string error = "Error en línea \"" + linea + "\". Nombre no puede ser vacío.";
                 throw error;
             }
-            else 
-            {
-                Empleado* empleado = this->trabajadores.at(id);
-                empleado->agregarSalario(salario);
-            }
+            float impuesto = salario * 7 / 100;
+            float salarioNeto = salario - impuesto;
 
+            this->totalRetencionImpuesto += impuesto;
+            this->totalSalariosPorPagar += salarioNeto;
+
+            Empleado* empleado = this->trabajadores.at(id);
+            empleado->agregarSalario(salarioNeto);
             
-
-            //cout << "Linea de " << nombre << " es correcta." << endl;
         }
         catch (string& excepcion)
         {
@@ -208,14 +209,10 @@ void Planilla::agregarHoras()
                 string error = "Error en línea \"" + linea + "\". Nombre no puede ser vacío.";
                 throw error;
             }
-            
+            this->totalSalariosPorPagar += montoHora * horaLaborada;
             Empleado* empleado = this->trabajadores.at(id);
             empleado->agregarPagoHoras(montoHora, horaLaborada);
-           
 
-
-
-            //cout << "Linea de " << nombre << " es correcta." << endl;
         }
         catch (string& excepcion)
         {
@@ -232,7 +229,6 @@ std::ostream& operator<<(std::ostream& o, const Planilla& planilla)
     Empleado* jefe = planilla.jefe;
     o << *(jefe);
 
-    return o;
     return o;
 }
 */
