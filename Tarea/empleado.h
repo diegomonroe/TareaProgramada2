@@ -11,20 +11,30 @@ using namespace std;
 class Empleado{
 
 	protected:
+	int	id{ 0 };
 	
-	string nombre{ "" };
-	string apellido{""};
 	string correo{ "" };
+	float salario{ 0.0f };
+
 	vector <Empleado*>empleadosDirectos;
+
+	Empleado* jefeDirecto{ nullptr };
+
+	virtual std::ostream& serializar(std::ostream& out) const;
 
 	Empleado(){}
 
 	public:
-		int	id{ 0 };
+	string nombre{ "" };
+	string apellido{ "" };
 	virtual ~Empleado(){}
 	virtual void agregarEmpleadoDirecto(Empleado*) {}
 	virtual void agregarSalario(float salarioNuevo){}
-	virtual void agregarPagoHoras(float pagoHora, int horas) {}
+	virtual void agregarPagoHoras(float pagoHora, int horas, float salario) {}
+	friend std::ostream& operator << (std::ostream& o, const Empleado& empleado);	
+	//virtual string getNombreCompleto( ) {}
+
+
 };
 
 #endif

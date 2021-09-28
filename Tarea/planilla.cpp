@@ -35,20 +35,21 @@ Planilla::~Planilla()
 
 void Planilla::agregarEmpleado(int id, string nombre, string apellido, string correo, int tipoEmpleado, int idJefe)
 {
-	Empleado* nuevoEmpleado = 0;
+	Empleado* nuevoEmpleado = nullptr;
+    Empleado* jefeDirecto = this->trabajadores.at(idJefe);
 	switch (tipoEmpleado)
 	{
     case 1:
-		nuevoEmpleado = new EmpleadoAsalariado(id, nombre, apellido, correo);
+		nuevoEmpleado = new EmpleadoAsalariado(id, nombre, apellido, correo, jefeDirecto);
 		break;
 	case 2:
-		nuevoEmpleado = new EmpleadoHoras(id, nombre, apellido, correo);
+		nuevoEmpleado = new EmpleadoHoras(id, nombre, apellido, correo, jefeDirecto);
 		break;
 	default:
 		break;
 	}
 
-	Empleado* jefeDirecto = this->trabajadores.at(idJefe);
+	
 	jefeDirecto->agregarEmpleadoDirecto(nuevoEmpleado);
 	this->trabajadores.insert(pair<int, Empleado*>(id, nuevoEmpleado));
 
@@ -154,11 +155,11 @@ void Planilla::agregarSalarios()
                 string error = "Error en línea \"" + linea + "\". Nombre no puede ser vacío.";
                 throw error;
             }
-            float impuesto = salario * 7 / 100;
-            float salarioNeto = salario - impuesto;
+            float impuesto = float(salario * 7 / 100);
+            float salarioNeto = float(salario - (salario * 7 / 100));
 
-            this->totalRetencionImpuesto += impuesto;
-            this->totalSalariosPorPagar += salarioNeto;
+            this->totalRetencionImpuesto += float(impuesto);
+            this->totalSalariosPorPagar += float(salarioNeto);
 
             Empleado* empleado = this->trabajadores.at(id);
             empleado->agregarSalario(salarioNeto);
@@ -209,9 +210,10 @@ void Planilla::agregarHoras()
                 string error = "Error en línea \"" + linea + "\". Nombre no puede ser vacío.";
                 throw error;
             }
-            this->totalSalariosPorPagar += montoHora * horaLaborada;
+            float salario = montoHora * horaLaborada;
+            this->totalSalariosPorPagar += float(salario);
             Empleado* empleado = this->trabajadores.at(id);
-            empleado->agregarPagoHoras(montoHora, horaLaborada);
+            empleado->agregarPagoHoras(montoHora, horaLaborada, salario);
 
         }
         catch (string& excepcion)
@@ -223,12 +225,16 @@ void Planilla::agregarHoras()
 
     ifs.close();
 }
-/*
-std::ostream& operator<<(std::ostream& o, const Planilla& planilla)
+
+ostream& operator<<(ostream& o, const Planilla& planilla)
 {
+    o << "ID_Empleado, Nombre completo, Nombre completo del supervisor, Monto a pagar(monto neto)"<<endl;
     Empleado* jefe = planilla.jefe;
     o << *(jefe);
-
+    cout << planilla.totalRetencionImpuesto << endl;
+    cout << planilla.totalSalariosPorPagar << endl;
+    o << "Subtotal:," << planilla.totalSalariosPorPagar<<endl;
+    o << "Impuestos a retener:," << planilla.totalRetencionImpuesto << endl;
+    o << "Total:," << float(planilla.totalRetencionImpuesto + planilla.totalSalariosPorPagar) << endl;
     return o;
 }
-*/

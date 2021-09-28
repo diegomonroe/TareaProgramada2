@@ -145,6 +145,7 @@
     <ClInclude Include="empleado.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="empleado.cpp" />
     <ClCompile Include="empleadoAsalariado.cpp" />
     <ClCompile Include="empleadoHoras.cpp" />
     <ClCompile Include="main.cpp" />

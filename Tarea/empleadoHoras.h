@@ -9,11 +9,23 @@ class EmpleadoHoras:public Empleado{
 	float montoPorHora{ 0 };
 	int horasLaboradas{ 0 };
 
+	protected:
+	virtual std::ostream& serializar(std::ostream& out) const;
+
+	//virtual string getNombreCompleto();
+
 	public:
-	EmpleadoHoras(int id, string nombre,string apellido, string correo);
-	virtual void agregarEmpleadoDirecto(Empleado*);
+
+	EmpleadoHoras(int id, string nombre, string apellido, string correo);
+	EmpleadoHoras(int id, string nombre,string apellido, string correo, Empleado* jefe);
 	virtual ~EmpleadoHoras();
-	virtual void agregarPagoHoras(float montoHora, int horas);
+
+	virtual void agregarEmpleadoDirecto(Empleado*);
+	
+	virtual void agregarPagoHoras(float montoHora, int horas, float salario);
+
+
+
 };
 
 #endif

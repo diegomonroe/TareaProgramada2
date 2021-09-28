@@ -24,7 +24,7 @@ class Planilla
 	void agregarSalarios();
 	void agregarHoras();
 
-	//friend std::ostream& operator << (std::ostream& o, const Planilla& planilla);
+	friend std::ostream& operator << (std::ostream& o, const Planilla& planilla);
 };
 
 #endif
