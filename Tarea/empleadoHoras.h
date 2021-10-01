@@ -12,7 +12,7 @@ class EmpleadoHoras:public Empleado{
 	protected:
 	virtual std::ostream& serializar(std::ostream& out) const;
 
-	//virtual string getNombreCompleto();
+	virtual string getNombreCompleto();
 
 	public:
 

@@ -43,7 +43,7 @@ ostream& EmpleadoHoras::serializar(std::ostream& o) const {
 	o << this->id << ",";
 	o << this->nombre << " "<< this->apellido << ",";
 	if (this->jefeDirecto != nullptr) {
-		o << this->jefeDirecto->nombre << " "<< this->jefeDirecto->apellido << ",";
+		o << this->jefeDirecto->getNombreCompleto() << ",";
 	}
 	else {
 		o << " " << ",";
@@ -57,8 +57,7 @@ ostream& EmpleadoHoras::serializar(std::ostream& o) const {
 
 	return o;
 }
-/*
+
 string EmpleadoHoras::getNombreCompleto() {
 	return this->nombre + " " + this->apellido;
 }
-*/

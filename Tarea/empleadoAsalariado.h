@@ -9,7 +9,7 @@ class EmpleadoAsalariado:public Empleado{
 
 	protected:
 	virtual std::ostream& serializar(std::ostream& out) const;
-	//virtual string getNombreCompleto();
+	virtual string getNombreCompleto();
 
 	public:
 	EmpleadoAsalariado(int id, string nombre, string apellido, string correo);

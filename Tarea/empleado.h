@@ -12,7 +12,8 @@ class Empleado{
 
 	protected:
 	int	id{ 0 };
-	
+	string nombre{ "" };
+	string apellido{ "" };
 	string correo{ "" };
 	float salario{ 0.0f };
 
@@ -25,14 +26,15 @@ class Empleado{
 	Empleado(){}
 
 	public:
-	string nombre{ "" };
-	string apellido{ "" };
+	
 	virtual ~Empleado(){}
 	virtual void agregarEmpleadoDirecto(Empleado*) {}
 	virtual void agregarSalario(float salarioNuevo){}
 	virtual void agregarPagoHoras(float pagoHora, int horas, float salario) {}
+	virtual string getNombreCompleto() = 0;
+
 	friend std::ostream& operator << (std::ostream& o, const Empleado& empleado);	
-	//virtual string getNombreCompleto( ) {}
+	
 
 
 };

@@ -155,11 +155,11 @@ void Planilla::agregarSalarios()
                 string error = "Error en línea \"" + linea + "\". Nombre no puede ser vacío.";
                 throw error;
             }
-            float impuesto = float(salario * 7 / 100);
-            float salarioNeto = float(salario - (salario * 7 / 100));
+            float impuesto = salario * (float)0.07;
+            float salarioNeto = salario - impuesto;
 
-            this->totalRetencionImpuesto += float(impuesto);
-            this->totalSalariosPorPagar += float(salarioNeto);
+            this->totalRetencionImpuesto += impuesto;
+            this->totalSalariosPorPagar += salarioNeto;
 
             Empleado* empleado = this->trabajadores.at(id);
             empleado->agregarSalario(salarioNeto);
@@ -174,6 +174,7 @@ void Planilla::agregarSalarios()
 
     ifs.close();
 }
+
 
 void Planilla::agregarHoras()
 {
@@ -211,7 +212,7 @@ void Planilla::agregarHoras()
                 throw error;
             }
             float salario = montoHora * horaLaborada;
-            this->totalSalariosPorPagar += float(salario);
+            this->totalSalariosPorPagar += salario;
             Empleado* empleado = this->trabajadores.at(id);
             empleado->agregarPagoHoras(montoHora, horaLaborada, salario);
 
@@ -228,13 +229,13 @@ void Planilla::agregarHoras()
 
 ostream& operator<<(ostream& o, const Planilla& planilla)
 {
-    o << "ID_Empleado, Nombre completo, Nombre completo del supervisor, Monto a pagar(monto neto)"<<endl;
+    o.precision(2);
+    o << "ID_Empleado, Nombre completo, Nombre completo del supervisor, Monto a pagar(monto neto)" << endl;
     Empleado* jefe = planilla.jefe;
     o << *(jefe);
-    cout << planilla.totalRetencionImpuesto << endl;
-    cout << planilla.totalSalariosPorPagar << endl;
-    o << "Subtotal:," << planilla.totalSalariosPorPagar<<endl;
-    o << "Impuestos a retener:," << planilla.totalRetencionImpuesto << endl;
-    o << "Total:," << float(planilla.totalRetencionImpuesto + planilla.totalSalariosPorPagar) << endl;
+    o << fixed << "Subtotal:," << planilla.totalSalariosPorPagar << endl;
+    o << fixed << "Impuestos a retener:," << planilla.totalRetencionImpuesto  << endl;
+    o << fixed << "Total:," << planilla.totalSalariosPorPagar + planilla.totalRetencionImpuesto << endl;
     return o;
 }
+
