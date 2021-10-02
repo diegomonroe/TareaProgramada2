@@ -10,7 +10,7 @@
 #include <string>
 #include <sstream>
 using namespace std;
-TEST(PlanillaTest, Test_Constructor) {
+TEST(PlanillaTest, Test_ConstructorDosTrabajadores) {
     Planilla* planilla = new Planilla();
     planilla->agregarEmpleado(1,"Diego","Monroe","1234@prueba.com",1,0);
     planilla->agregarEmpleado(2, "Angelica", "Curling", "9876@prueba.com", 2, 1);
@@ -20,12 +20,19 @@ TEST(PlanillaTest, Test_Constructor) {
     string actual = streamSalida.str();
 
     ostringstream streamSalidaEsperada{};
-    streamSalidaEsperada << "1,Diego Monroe,1234@prueba.com, ,0.00" << endl;
-    streamSalidaEsperada << "2,Angelica Curling,9876@prueba.com,Diego Monroe,0.00" << endl;
+    streamSalidaEsperada << "ID_Empleado, Nombre completo, Nombre completo del supervisor, Monto a pagar(monto neto)" << endl;
+    streamSalidaEsperada << "1,Diego Monroe, ,0.00" << endl;
+    streamSalidaEsperada << "2,Angelica Curling,Diego Monroe,0.00" << endl;
+
+    streamSalidaEsperada << "Subtotal:,0.00" << endl;
+    streamSalidaEsperada << "Impuestos a retener:,0.00" << endl;
+    streamSalidaEsperada << "Total:,0.00" << endl;
+
+
     string esperada = streamSalidaEsperada.str();
     
 
    delete planilla;
 
-    EXPECT_EQ(1, 1);
+    EXPECT_EQ(esperada, actual);
 }
