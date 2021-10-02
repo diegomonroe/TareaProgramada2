@@ -41,13 +41,16 @@ void EmpleadoAsalariado::agregarSalario(float salarioNuevo)
 ostream& EmpleadoAsalariado::serializar(std::ostream& o) const {
 	o << this->id << ",";
 	o << this->nombre << " " << this->apellido << ","; 
+
 	if (this->jefeDirecto != nullptr) {
 		o << this->jefeDirecto->getNombreCompleto() << ",";
 	}
 	else {
 		o << " " << ",";
 	}
-	o << this->salario << endl;
+
+	o.precision(2);
+	o << fixed << this->salario << endl;
 
 	for (Empleado* empleadoDirecto : this->empleadosDirectos)
 	{

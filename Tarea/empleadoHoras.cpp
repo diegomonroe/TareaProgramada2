@@ -48,7 +48,8 @@ ostream& EmpleadoHoras::serializar(std::ostream& o) const {
 	else {
 		o << " " << ",";
 	}
-	o << this->salario << endl;
+	o.precision(2);
+	o <<fixed<< this->salario << endl;
 
 	for (Empleado *empleadoDirecto : this->empleadosDirectos)
 	{

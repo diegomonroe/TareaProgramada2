@@ -6,53 +6,58 @@
 #include <string>
 #include <sstream>
 
-void Planilla::agregarDirector(int idJefe, string nombreJefe, string apellidoJefe, string correoJefe, int tipoEmpleado)
+void Planilla::agregarDirector(int id, string nombreJefe, string apellidoJefe, string correoJefe, int tipoEmpleado)
 {
 	switch (tipoEmpleado)
 	{
 	case 1:
-		this->jefe = new EmpleadoAsalariado(idJefe, nombreJefe, apellidoJefe, correoJefe);
+		this->director = new EmpleadoAsalariado(id, nombreJefe, apellidoJefe, correoJefe);
 		break;
 	case 2:
-		this->jefe = new EmpleadoHoras(idJefe, nombreJefe, apellidoJefe, correoJefe);
+		this->director = new EmpleadoHoras(id, nombreJefe, apellidoJefe, correoJefe);
 		break;
 	default:
 		break;
 	}
 	
-	this->trabajadores.insert(pair<int, Empleado*>(idJefe, jefe));
+	this->trabajadores.insert(pair<int, Empleado*>(id, director));
 }
 
 Planilla::Planilla()
 {
-    this->jefe = nullptr;
+    this->director = nullptr;
 }
 
 Planilla::~Planilla()
 {
-	delete this->jefe;
+	delete this->director;
 }
 
 void Planilla::agregarEmpleado(int id, string nombre, string apellido, string correo, int tipoEmpleado, int idJefe)
 {
-	Empleado* nuevoEmpleado = nullptr;
-    Empleado* jefeDirecto = this->trabajadores.at(idJefe);
-	switch (tipoEmpleado)
-	{
-    case 1:
-		nuevoEmpleado = new EmpleadoAsalariado(id, nombre, apellido, correo, jefeDirecto);
-		break;
-	case 2:
-		nuevoEmpleado = new EmpleadoHoras(id, nombre, apellido, correo, jefeDirecto);
-		break;
-	default:
-		break;
-	}
-
 	
-	jefeDirecto->agregarEmpleadoDirecto(nuevoEmpleado);
-	this->trabajadores.insert(pair<int, Empleado*>(id, nuevoEmpleado));
-
+    if (idJefe == 0)
+    {
+        this->agregarDirector(id, nombre, apellido, correo, tipoEmpleado);
+    }
+    else 
+    {
+        Empleado* nuevoEmpleado = nullptr;
+        Empleado* jefeDirecto = this->trabajadores.at(idJefe);
+	    switch (tipoEmpleado)
+	    {
+        case 1:
+		    nuevoEmpleado = new EmpleadoAsalariado(id, nombre, apellido, correo, jefeDirecto);
+		    break;
+	    case 2:
+		    nuevoEmpleado = new EmpleadoHoras(id, nombre, apellido, correo, jefeDirecto);
+		    break;
+	    default:
+		    break;
+	    }
+	    jefeDirecto->agregarEmpleadoDirecto(nuevoEmpleado);
+	    this->trabajadores.insert(pair<int, Empleado*>(id, nuevoEmpleado));
+    }
 }
 
 void Planilla::llenarPlanilla()
@@ -99,14 +104,8 @@ void Planilla::llenarPlanilla()
                 throw error;
             }
 
-            if (idJefe == 0) 
-            {
-                this->agregarDirector(id, nombre, apellido, correo, tipoTrabajador);
-            }
-            else
-            {
-                this->agregarEmpleado(id, nombre, apellido, correo, tipoTrabajador, idJefe);
-            }
+            this->agregarEmpleado(id, nombre, apellido, correo, tipoTrabajador, idJefe);
+            
 
             //cout << "Linea de " << nombre << " es correcta." << endl;
         }
@@ -231,11 +230,10 @@ ostream& operator<<(ostream& o, const Planilla& planilla)
 {
     o.precision(2);
     o << "ID_Empleado, Nombre completo, Nombre completo del supervisor, Monto a pagar(monto neto)" << endl;
-    Empleado* jefe = planilla.jefe;
+    Empleado* jefe = planilla.director;
     o << *(jefe);
     o << fixed << "Subtotal:," << planilla.totalSalariosPorPagar << endl;
     o << fixed << "Impuestos a retener:," << planilla.totalRetencionImpuesto  << endl;
     o << fixed << "Total:," << planilla.totalSalariosPorPagar + planilla.totalRetencionImpuesto << endl;
     return o;
 }
-

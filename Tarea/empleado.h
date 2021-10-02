@@ -7,7 +7,6 @@
 #include <vector>
 using namespace std;
 
-
 class Empleado{
 
 	protected:
@@ -16,25 +15,20 @@ class Empleado{
 	string apellido{ "" };
 	string correo{ "" };
 	float salario{ 0.0f };
-
 	vector <Empleado*>empleadosDirectos;
-
 	Empleado* jefeDirecto{ nullptr };
 
 	virtual std::ostream& serializar(std::ostream& out) const;
 
 	Empleado(){}
-
-	public:
 	
+	public:
 	virtual ~Empleado(){}
 	virtual void agregarEmpleadoDirecto(Empleado*) {}
 	virtual void agregarSalario(float salarioNuevo){}
 	virtual void agregarPagoHoras(float pagoHora, int horas, float salario) {}
 	virtual string getNombreCompleto() = 0;
-
-	friend std::ostream& operator << (std::ostream& o, const Empleado& empleado);	
-	
+	friend std::ostream& operator << (std::ostream& o, const Empleado& empleado);
 
 
 };
