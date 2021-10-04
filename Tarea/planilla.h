@@ -12,11 +12,9 @@ class Planilla
 	map<int, Empleado *> trabajadores;
 	float totalSalariosPorPagar = 0.0f;
 	float totalRetencionImpuesto = 0.0f;
-	
+	void agregarDirector(int idJefe, string nombreJefe, string apellidoJefe, string correoJefe, int tipoEmpleado);
 
 	public:
-
-	void agregarDirector(int idJefe, string nombreJefe, string apellidoJefe, string correoJefe, int tipoEmpleado);
 	Planilla();
 	~Planilla();
 	void agregarEmpleado(int id, string nombre, string apellido, string correo, int tipoEmpleado, int idJefe);
