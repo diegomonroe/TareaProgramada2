@@ -60,19 +60,13 @@ void Planilla::agregarEmpleado(int id, string nombre, string apellido, string co
     }
 }
 
-void Planilla::llenarPlanilla()
+void Planilla::llenarPlanilla(string archivoPlanilla)
 {
-    ifstream ifs("Personas.txt", ifstream::in);
-    if (!ifs.is_open())
-    {
-        cerr << "Error leyendo archivo ejemplo.txt" << endl;
-        //return -1;
-    }
-    
+
+    std::istringstream streamEntradaPersonas{ archivoPlanilla };
    
     // Leer línea por línea 
     string linea{ "" };
-
     int id{ 0 };
     string nombre{""};
     string apellido{""};
@@ -80,13 +74,12 @@ void Planilla::llenarPlanilla()
     int tipoTrabajador{ 0 };
     int idJefe{ 0 };
 
-
-    while (getline(ifs, linea)) {
+    while (getline(streamEntradaPersonas, linea)) {
 
         try
         {
             // Procesamos la línea
-            istringstream stream(linea);
+            istringstream streamEntradaPersonas(linea);
 
             id = 0;
             nombre = "";
@@ -95,7 +88,7 @@ void Planilla::llenarPlanilla()
             tipoTrabajador = 0;
             idJefe = 0;
 
-            stream >> id >> nombre >> apellido >> correo>>tipoTrabajador>>idJefe;
+            streamEntradaPersonas >> id >> nombre >> apellido >> correo>>tipoTrabajador>>idJefe;
 
             // Revisar si línea es válida
             if (nombre.length() == 0)
@@ -106,8 +99,6 @@ void Planilla::llenarPlanilla()
 
             this->agregarEmpleado(id, nombre, apellido, correo, tipoTrabajador, idJefe);
             
-
-            //cout << "Linea de " << nombre << " es correcta." << endl;
         }
         catch (string& excepcion)
         {
@@ -115,19 +106,12 @@ void Planilla::llenarPlanilla()
         }
     }
 
-
-    ifs.close();
 }
 
-void Planilla::agregarSalarios()
+void Planilla::agregarSalarios(string archivoSalariosNomina)
 {
-    ifstream ifs("Nomina.txt", ifstream::in);
-    if (!ifs.is_open())
-    {
-        cerr << "Error leyendo archivo ejemplo.txt" << endl;
-        //return -1;
-    }
-
+    std::istringstream streamEntradaPersonas{ archivoSalariosNomina };
+   
 
     // Leer línea por línea 
     string linea{ "" };
@@ -135,17 +119,17 @@ void Planilla::agregarSalarios()
     float salario{ 0.0f };
 
 
-    while (getline(ifs, linea)) {
+    while (getline(streamEntradaPersonas, linea)) {
 
         try
         {
             // Procesamos la línea
-            istringstream stream(linea);
+            istringstream streamEntradaPersonas(linea);
 
             id = 0;
             salario = 0.0f;
 
-            stream >> id >> salario;
+            streamEntradaPersonas >> id >> salario;
 
 
             // Revisar si línea es válida
@@ -170,20 +154,12 @@ void Planilla::agregarSalarios()
         }
     }
 
-
-    ifs.close();
 }
 
 
-void Planilla::agregarHoras()
+void Planilla::agregarHoras(string archivoPagoHoras)
 {
-    ifstream ifs("HorasTrabajadas.txt", ifstream::in);
-    if (!ifs.is_open())
-    {
-        cerr << "Error leyendo archivo ejemplo.txt" << endl;
-        //return -1;
-    }
-
+    std::istringstream streamEntradaPersonas{ archivoPagoHoras };
 
     // Leer línea por línea 
     string linea{ "" };
@@ -192,17 +168,17 @@ void Planilla::agregarHoras()
     int horaLaborada{ 0 };
 
 
-    while (getline(ifs, linea)) {
+    while (getline(streamEntradaPersonas, linea)) {
 
         try
         {
             // Procesamos la línea
-            istringstream stream(linea);
+            istringstream streamEntradaPersonas(linea);
 
             id = 0;
             montoHora = 0.0f;
             horaLaborada = 0;
-            stream >> id >> montoHora>>horaLaborada;
+            streamEntradaPersonas >> id >> montoHora>>horaLaborada;
 
             // Revisar si línea es válida
             if (id == 0)
@@ -221,9 +197,26 @@ void Planilla::agregarHoras()
             cerr << excepcion << endl;
         }
     }
+}
 
-
+string Planilla::convertirArchivo(string nombreArchivo)
+{
+    stringstream archivo;
+    ifstream ifs(nombreArchivo, ifstream::in);
+    if (!ifs.is_open())
+    {
+        cerr << "Error leyendo archivo ejemplo.txt" << endl;
+        //return -1;
+    }
+    string linea{ "" };
+    while (getline(ifs, linea)) {
+        archivo<<linea<<endl;
+        
+    }
     ifs.close();
+
+    string archivoConvertido = archivo.str();
+    return archivoConvertido;
 }
 
 ostream& operator<<(ostream& o, const Planilla& planilla)

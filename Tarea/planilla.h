@@ -20,11 +20,12 @@ class Planilla
 	Planilla();
 	~Planilla();
 	void agregarEmpleado(int id, string nombre, string apellido, string correo, int tipoEmpleado, int idJefe);
-	void llenarPlanilla();
-	void agregarSalarios();
-	void agregarHoras();
+	void llenarPlanilla(string archivoPlanilla);
+	void agregarSalarios(string archivoSalariosNomina);
+	void agregarHoras(string archivoPagoHoras);
 
 	friend std::ostream& operator << (std::ostream& o, const Planilla& planilla) ;
+	string convertirArchivo(string nombreArchivo);
 };
 
 #endif
