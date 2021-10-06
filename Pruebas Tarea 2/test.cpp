@@ -11,17 +11,16 @@
 #include <sstream>
 using namespace std;
 
-namespace Test_Lectura_Escritura {
-
+namespace Test_Planilla {
     TEST(LecturaPlanillaTest, Test_Lectura_Escritura_Archivo) {
-        
+
         //Ingreso de archivo
         ostringstream ingresoDatos{};
         ingresoDatos << "1 Diego Monroe 1234@prueba.com 1 0" << endl;
         ingresoDatos << "2 Angelica Curling 9876@prueba.com 2 1" << endl;
         ingresoDatos << "3 Karol Corrales 5641@prueba.com 1 2" << endl;
         string entradaEjemplo = ingresoDatos.str();
-        
+
         //LLenado planilla con los datos personales de los trabajadores
         Planilla* planilla = new Planilla();
         planilla->llenarPlanilla(entradaEjemplo);
@@ -45,11 +44,6 @@ namespace Test_Lectura_Escritura {
 
         EXPECT_EQ(esperada, actual);
     }
-    
-}
-
-namespace Test_Agregar_Empleados{
-
     TEST(CreacionPlanillaTest, Test_ConstructorSoloDirector) {
         Planilla* planilla = new Planilla();
 
@@ -80,7 +74,6 @@ namespace Test_Agregar_Empleados{
 
         EXPECT_EQ(esperada, actual);
     }
-
     TEST(CreacionPlanillaTest, Test_ConstructorDosTrabajadores) {
         Planilla* planilla = new Planilla();
 
@@ -112,7 +105,6 @@ namespace Test_Agregar_Empleados{
 
         EXPECT_EQ(esperada, actual);
     }
-
     TEST(CreacionPlanillaTest, Test_ConstructorTresTrabajadores) {
         Planilla* planilla = new Planilla();
         //Ingreso de archivo
@@ -144,14 +136,9 @@ namespace Test_Agregar_Empleados{
 
         EXPECT_EQ(esperada, actual);
     }
-
-}
-
-namespace Test_Agregar_Salarios {
-
     TEST(LlenadoSalariosPlanillaTest, Test_AgregarSalarioDirector) {
         Planilla* planilla = new Planilla();
-        
+
         //Ingreso de archivo personas
         ostringstream ingresoDatosPersonas{};
         ingresoDatosPersonas << "1 Diego Monroe 1234@prueba.com 1 0" << endl;
@@ -185,7 +172,6 @@ namespace Test_Agregar_Salarios {
 
         EXPECT_EQ(esperada, actual);
     }
-
     TEST(LlenadoSalariosPlanillaTest, Test_AgregarSalarioDosTrabajadores) {
         Planilla* planilla = new Planilla();
 
@@ -206,7 +192,7 @@ namespace Test_Agregar_Salarios {
 
         //Llenando planilla con los salarios
         planilla->agregarSalarios(entradaEjemploSalarios);
-        
+
         ostringstream streamSalida{};
         streamSalida << *planilla;
         string actual = streamSalida.str();
@@ -224,7 +210,6 @@ namespace Test_Agregar_Salarios {
 
         EXPECT_EQ(esperada, actual);
     }
-
     TEST(LlenadoSalariosPlanillaTest, Test_AgregarSalarioTresTrabajadores) {
         Planilla* planilla = new Planilla();
 
@@ -266,11 +251,6 @@ namespace Test_Agregar_Salarios {
 
         EXPECT_EQ(esperada, actual);
     }
-
-}
-
-namespace Test_Agregar_Pago_Horas {
-
     TEST(LlenadoPagoHorasPlanillaTest, Test_AgregarHorasDirector) {
         Planilla* planilla = new Planilla();
 
@@ -307,7 +287,6 @@ namespace Test_Agregar_Pago_Horas {
 
         EXPECT_EQ(esperada, actual);
     }
-
     TEST(LlenadoPagoHorasPlanillaTest, Test_AgregarHorasDosTrabajadores) {
         Planilla* planilla = new Planilla();
 
@@ -346,7 +325,6 @@ namespace Test_Agregar_Pago_Horas {
 
         EXPECT_EQ(esperada, actual);
     }
-
     TEST(LlenadoPagoHorasPlanillaTest, Test_AgregarHorasTresTrabajadores) {
         Planilla* planilla = new Planilla();
 
@@ -388,13 +366,8 @@ namespace Test_Agregar_Pago_Horas {
 
         EXPECT_EQ(esperada, actual);
     }
-
-}
-
-namespace Test_Agregar_Empleados_Multinivel {
-
     TEST(CreacionPlanillaTest, Test_Agregar_Empleados_UnNivel) {
-        
+
         Planilla* planilla = new Planilla();
         //Ingreso de archivo
         ostringstream ingresoDatos{};
@@ -427,7 +400,6 @@ namespace Test_Agregar_Empleados_Multinivel {
 
         EXPECT_EQ(esperada, actual);
     }
-
     TEST(CreacionPlanillaTest, Test_Agregar_Empleados_DosNivel) {
         Planilla* planilla = new Planilla();
         //Ingreso de archivo
@@ -463,7 +435,6 @@ namespace Test_Agregar_Empleados_Multinivel {
 
         EXPECT_EQ(esperada, actual);
     }
-
     TEST(CreacionPlanillaTest, Test_Agregar_Empleados_TresNivel) {
         Planilla* planilla = new Planilla();
         //Ingreso de archivo
@@ -491,7 +462,7 @@ namespace Test_Agregar_Empleados_Multinivel {
         streamSalidaEsperada << "4,Dev Phrasab,Angelica Curling,0.00" << endl;
         streamSalidaEsperada << "450,Marcelo Padilla,Dev Phrasab,0.00" << endl;
         streamSalidaEsperada << "650,Alberto Portilla,Dev Phrasab,0.00" << endl;
-        streamSalidaEsperada << "3,Karol Corrales,Diego Monroe,0.00" << endl;        
+        streamSalidaEsperada << "3,Karol Corrales,Diego Monroe,0.00" << endl;
         streamSalidaEsperada << "Subtotal:,0.00" << endl;
         streamSalidaEsperada << "Impuestos a retener:,0.00" << endl;
         streamSalidaEsperada << "Total:,0.00" << endl;
@@ -501,11 +472,9 @@ namespace Test_Agregar_Empleados_Multinivel {
 
         EXPECT_EQ(esperada, actual);
     }
-    }
+}
 
-namespace Test_EmpleadoAsalarido {
-
-        
+namespace Test_EmpleadoAsalarido {  
     TEST(Test_TrabajadorAsalariado, Test_GetNombre) {
 
         Empleado* empleado = new EmpleadoAsalariado(1, "Diego", "Monroe", "prueba@.com");
@@ -513,7 +482,6 @@ namespace Test_EmpleadoAsalarido {
         delete empleado;
         EXPECT_EQ("Diego Monroe", actual);
     }
-
     TEST(Test_TrabajadorAsalariado, Agregar_EmpleadoDirecto) {
         Empleado* empleado1 = new EmpleadoAsalariado(1, "Diego", "Monroe", "prueba@.com");
         Empleado* empleado2 = new EmpleadoAsalariado(2, "Angelica", "Curling", "2prueba@.com", empleado1);
@@ -532,7 +500,6 @@ namespace Test_EmpleadoAsalarido {
         delete empleado1;
         EXPECT_EQ(esperado, actual);
     }
-
     TEST(Test_TrabajadorAsalariado, Test_AgregarSalario) {
 
         Empleado* empleado = new EmpleadoAsalariado(1, "Diego", "Monroe", "prueba@.com");
@@ -549,10 +516,9 @@ namespace Test_EmpleadoAsalarido {
         delete empleado;
         EXPECT_EQ(esperado, actual);
         }
-    }
+}
 
 namespace Test_EmpleadoHoras {
-
     TEST(Test_TrabajadorHoras, Test_GetNombre) {
 
         Empleado* empleado = new EmpleadoHoras(1, "Diego", "Monroe", "prueba@.com");
@@ -560,7 +526,6 @@ namespace Test_EmpleadoHoras {
         delete empleado;
         EXPECT_EQ("Diego Monroe", actual);
     }
-
     TEST(Test_TrabajadorHoras, Agregar_EmpleadoDirecto) {
         Empleado* empleado1 = new EmpleadoHoras(1, "Diego", "Monroe", "prueba@.com");
         Empleado* empleado2 = new EmpleadoHoras(2, "Angelica", "Curling", "2prueba@.com", empleado1);
@@ -579,7 +544,6 @@ namespace Test_EmpleadoHoras {
         delete empleado1;
         EXPECT_EQ(esperado, actual);
     }
-
     TEST(Test_TrabajadorHoras, Test_AgregarHoras) {
 
         Empleado* empleado = new EmpleadoHoras(1, "Diego", "Monroe", "prueba@.com");
