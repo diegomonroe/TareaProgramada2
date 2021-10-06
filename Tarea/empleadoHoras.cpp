@@ -26,7 +26,6 @@ void EmpleadoHoras::agregarEmpleadoDirecto(Empleado* nuevoEmpleado)
 
 EmpleadoHoras::~EmpleadoHoras()
 {
-	
 	for (Empleado* empleado : this->empleadosDirectos) {
 		delete empleado;
 	}
@@ -42,12 +41,14 @@ void EmpleadoHoras::agregarPagoHoras(float montoHora, int horas, float salario)
 ostream& EmpleadoHoras::serializar(std::ostream& o) const {
 	o << this->id << ",";
 	o << this->nombre << " "<< this->apellido << ",";
+
 	if (this->jefeDirecto != nullptr) {
 		o << this->jefeDirecto->getNombreCompleto() << ",";
 	}
 	else {
 		o << " " << ",";
 	}
+
 	o.precision(2);
 	o <<fixed<< this->salario << endl;
 

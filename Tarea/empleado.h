@@ -17,7 +17,6 @@ class Empleado{
 	float salario{ 0.0f };
 	vector <Empleado*>empleadosDirectos;
 	Empleado* jefeDirecto{ nullptr };
-
 	virtual std::ostream& serializar(std::ostream& out) const;
 
 	Empleado(){}

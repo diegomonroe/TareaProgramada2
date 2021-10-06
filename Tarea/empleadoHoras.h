@@ -15,18 +15,10 @@ class EmpleadoHoras:public Empleado{
 	virtual ~EmpleadoHoras();
 	virtual void agregarEmpleadoDirecto(Empleado*);
 	virtual void agregarPagoHoras(float montoHora, int horas, float salario);
-	
 
 	public:
-
 	EmpleadoHoras(int id, string nombre, string apellido, string correo);
 	EmpleadoHoras(int id, string nombre,string apellido, string correo, Empleado* jefe);
-	
-
-	
-
-
-
 };
 
 #endif

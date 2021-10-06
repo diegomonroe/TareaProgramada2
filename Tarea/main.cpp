@@ -15,7 +15,7 @@ int main() {
 	planilla->agregarSalarios(archivoSalariosNomina);
 
 	string archivoPagoHoras = planilla->convertirArchivo("HorasTrabajadas.txt");
-	planilla->agregarHoras(archivoSalariosNomina);
+	planilla->agregarHoras(archivoPagoHoras);
 
 	std::ofstream archivoSalida("Reporte.csv", std::ofstream::out);
 	archivoSalida << *planilla;

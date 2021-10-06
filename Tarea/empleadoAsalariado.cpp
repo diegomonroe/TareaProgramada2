@@ -2,8 +2,6 @@
 #include <iostream>
 using namespace std;
 
-
-
 EmpleadoAsalariado::EmpleadoAsalariado(int idNuevo, string nombreNuevo, string apellidoNuevo, string correoNuevo)
 {
 	this->id = idNuevo;
@@ -56,11 +54,8 @@ ostream& EmpleadoAsalariado::serializar(std::ostream& o) const {
 	{
 		o << *empleadoDirecto;
 	}
-
-
 	return o;
 }
-
 
 string EmpleadoAsalariado::getNombreCompleto() {
 	return this->nombre + " " + this->apellido;
