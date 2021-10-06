@@ -25,7 +25,7 @@ class Empleado{
 	virtual ~Empleado(){}
 	virtual void agregarEmpleadoDirecto(Empleado*) {}
 	virtual void agregarSalario(float salarioNuevo){}
-	virtual void agregarPagoHoras(float pagoHora, int horas, float salario) {}
+	virtual void agregarPagoHoras(float pagoHora, int horas) {}
 	virtual string getNombreCompleto() = 0;
 	friend std::ostream& operator << (std::ostream& o, const Empleado& empleado);
 

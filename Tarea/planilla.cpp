@@ -229,9 +229,9 @@ void Planilla::agregarHoras(string archivoPagoHoras)
                 }
                 Empleado* empleado = this->trabajadores.at(id);
                 float salario = montoHora * horaLaborada;
-                this->totalSalariosPorPagar += salario;
+                this->agregarSalarioPorPagar(salario);
                 
-                empleado->agregarPagoHoras(montoHora, horaLaborada, salario);
+                empleado->agregarPagoHoras(montoHora, horaLaborada);
 
             }
             catch (string& excepcion)

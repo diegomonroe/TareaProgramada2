@@ -31,11 +31,11 @@ EmpleadoHoras::~EmpleadoHoras()
 	}
 }
 
-void EmpleadoHoras::agregarPagoHoras(float montoHora, int horas, float salario)
+void EmpleadoHoras::agregarPagoHoras(float montoHora, int horas)
 {
 	this->horasLaboradas = horas;
 	this->montoPorHora = montoHora;
-	this->salario = salario;
+	this->salario = this->horasLaboradas * this->montoPorHora;
 }
 
 ostream& EmpleadoHoras::serializar(std::ostream& o) const {

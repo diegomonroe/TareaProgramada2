@@ -502,3 +502,98 @@ namespace Test_Agregar_Empleados_Multinivel {
         EXPECT_EQ(esperada, actual);
     }
     }
+
+namespace Test_EmpleadoAsalarido {
+
+        
+    TEST(Test_TrabajadorAsalariado, Test_GetNombre) {
+
+        Empleado* empleado = new EmpleadoAsalariado(1, "Diego", "Monroe", "prueba@.com");
+        string actual = empleado->getNombreCompleto();
+        delete empleado;
+        EXPECT_EQ("Diego Monroe", actual);
+    }
+
+    TEST(Test_TrabajadorAsalariado, Agregar_EmpleadoDirecto) {
+        Empleado* empleado1 = new EmpleadoAsalariado(1, "Diego", "Monroe", "prueba@.com");
+        Empleado* empleado2 = new EmpleadoAsalariado(2, "Angelica", "Curling", "2prueba@.com", empleado1);
+
+        empleado1->agregarEmpleadoDirecto(empleado2);
+
+        ostringstream streamsalida;
+        streamsalida << *empleado1;
+        string actual = streamsalida.str();
+
+        ostringstream streamesperado;
+        streamesperado << "1,Diego Monroe, ,0.00" << endl;
+        streamesperado << "2,Angelica Curling,Diego Monroe,0.00" << endl;
+        string esperado = streamesperado.str();
+
+        delete empleado1;
+        EXPECT_EQ(esperado, actual);
+    }
+
+    TEST(Test_TrabajadorAsalariado, Test_AgregarSalario) {
+
+        Empleado* empleado = new EmpleadoAsalariado(1, "Diego", "Monroe", "prueba@.com");
+        empleado->agregarSalario(1000);
+
+        ostringstream streamsalida;
+        streamsalida << *empleado;
+        string actual = streamsalida.str();
+
+        ostringstream streamesperado;
+        streamesperado << "1,Diego Monroe, ,1000.00" << endl;
+        string esperado = streamesperado.str();
+
+        delete empleado;
+        EXPECT_EQ(esperado, actual);
+        }
+    }
+
+namespace Test_EmpleadoHoras {
+
+    TEST(Test_TrabajadorHoras, Test_GetNombre) {
+
+        Empleado* empleado = new EmpleadoHoras(1, "Diego", "Monroe", "prueba@.com");
+        string actual = empleado->getNombreCompleto();
+        delete empleado;
+        EXPECT_EQ("Diego Monroe", actual);
+    }
+
+    TEST(Test_TrabajadorHoras, Agregar_EmpleadoDirecto) {
+        Empleado* empleado1 = new EmpleadoHoras(1, "Diego", "Monroe", "prueba@.com");
+        Empleado* empleado2 = new EmpleadoHoras(2, "Angelica", "Curling", "2prueba@.com", empleado1);
+
+        empleado1->agregarEmpleadoDirecto(empleado2);
+
+        ostringstream streamsalida;
+        streamsalida << *empleado1;
+        string actual = streamsalida.str();
+
+        ostringstream streamesperado;
+        streamesperado << "1,Diego Monroe, ,0.00" << endl;
+        streamesperado << "2,Angelica Curling,Diego Monroe,0.00" << endl;
+        string esperado = streamesperado.str();
+
+        delete empleado1;
+        EXPECT_EQ(esperado, actual);
+    }
+
+    TEST(Test_TrabajadorHoras, Test_AgregarHoras) {
+
+        Empleado* empleado = new EmpleadoHoras(1, "Diego", "Monroe", "prueba@.com");
+        empleado->agregarPagoHoras(20,10);
+
+        ostringstream streamsalida;
+        streamsalida << *empleado;
+        string actual = streamsalida.str();
+
+        ostringstream streamesperado;
+        streamesperado << "1,Diego Monroe, ," <<20*10<<".00"<< endl;
+        string esperado = streamesperado.str();
+
+        delete empleado;
+        EXPECT_EQ(esperado, actual);
+    }
+}
